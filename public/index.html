@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171820">
+  <title>LOLOCHAT — Messagerie privée</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main id="authView" class="auth-wrap">
+    <section class="auth-card">
+      <div class="brand-mark">L</div>
+      <h1>LOLO<span>CHAT</span></h1>
+      <p class="muted">Un endroit privé pour discuter entre amis.</p>
+      <div class="tabs">
+        <button class="tab active" id="loginTab">Connexion</button>
+        <button class="tab" id="registerTab">Inscription</button>
+      </div>
+      <form id="authForm">
+        <label for="username">Pseudo</label>
+        <input id="username" name="username" autocomplete="username" minlength="3" maxlength="20" required placeholder="TonPseudo">
+        <label for="password">Mot de passe</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" minlength="10" maxlength="72" required placeholder="10 caractères minimum">
+        <div id="inviteField" class="hidden">
+          <label for="invite">Code d'invitation</label>
+          <input id="invite" name="invite" autocomplete="off" placeholder="Code reçu de ton ami">
+        </div>
+        <button class="primary full" id="submitAuth" type="submit">Se connecter</button>
+      </form>
+      <p id="authError" class="error" role="alert"></p>
+      <p class="tiny muted">Pas d'adresse mail nécessaire. Garde ton mot de passe en sécurité.</p>
+    </section>
+  </main>
+
+  <main id="chatView" class="app hidden">
+    <aside class="sidebar">
+      <div class="server-name"><div class="server-icon">L</div><div><strong>LOLOCHAT</strong><small>Salon privé</small></div></div>
+      <div class="side-label">SALONS</div>
+      <div class="channel active"><span>#</span> discussion</div>
+      <div class="side-spacer"></div>
+      <div class="profile">
+        <div class="avatar" id="myAvatar">?</div>
+        <div class="profile-name"><strong id="myName">Utilisateur</strong><small>Connecté</small></div>
+        <button id="logoutBtn" class="icon-btn" title="Déconnexion" aria-label="Déconnexion">↪</button>
+      </div>
+    </aside>
+    <section class="chat-panel">
+      <header class="chat-header"><div><strong><span class="hash">#</span> discussion</strong><small>Les messages sont partagés avec les membres invités.</small></div></header>
+      <div id="messages" class="messages" aria-live="polite"></div>
+      <form id="messageForm" class="composer">
+        <label class="attach" for="imageInput" title="Envoyer un PNG ou GIF">＋</label>
+        <input id="imageInput" type="file" accept="image/png,image/gif,.png,.gif" hidden>
+        <input id="messageInput" maxlength="2000" autocomplete="off" placeholder="Écrire un message dans #discussion…">
+        <button class="send-btn" type="submit" aria-label="Envoyer">➤</button>
+      </form>
+      <p class="composer-hint">PNG et GIF acceptés · 5 Mo maximum · Entrée pour envoyer</p>
+    </section>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
